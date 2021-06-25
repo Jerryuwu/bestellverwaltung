@@ -1,0 +1,78 @@
+﻿<reactiveUi:ReactiveWindow x:TypeArguments="viewModels:MainViewModel" x:Class="Bestellverwaltung.WPF.MainWindow"
+                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                           xmlns:local="clr-namespace:Bestellverwaltung.WPF"
+                           xmlns:reactiveUi="http://reactiveui.net"
+                           xmlns:viewModels="clr-namespace:Bestellverwaltung.WPF.ViewModels"
+                           xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                           mc:Ignorable="d"
+                           Title="MainWindow" Height="450" Width="800">
+    
+    <materialDesign:DrawerHost OpenMode="Standard" x:Name="DrawerHost" IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+        <materialDesign:DrawerHost.LeftDrawerContent>
+            <DockPanel MinWidth="212">
+                <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}"
+                              DockPanel.Dock="Top"
+                              HorizontalAlignment="Left" Margin="16"
+                              IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"
+                              VerticalAlignment="Top" />
+                <ListView x:Name="ListViewMenu">
+                    <ListViewItem x:Name="NewOrder" Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Archive" Height="25" Width="25" Margin="10" />
+                            <TextBlock Text="Bestellung anlegen" VerticalAlignment="Center" Margin="20 10" />
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem x:Name="Companies" Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Domain" Height="25" Width="25" Margin="10" />
+                            <TextBlock Text="Manage companies" VerticalAlignment="Center" Margin="20 10" />
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="60" x:Name="Fees">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Sack" Height="25" Width="25" Margin="10" />
+                            <TextBlock Text="Manage fees" VerticalAlignment="Center" Margin="20 10" />
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="60" x:Name="DeliveryCosts">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="CurrencyEur" Height="25" Width="25" Margin="10" />
+                            <TextBlock Text="Delivery costs" VerticalAlignment="Center" Margin="20 10" />
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="60" x:Name="Articles">
+                    
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="FormatListCheckbox" Height="25" Width="25" Margin="10" />
+                            <TextBlock Text="Articles" VerticalAlignment="Center" Margin="20 10" />
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+            </DockPanel>
+        </materialDesign:DrawerHost.LeftDrawerContent>
+        <DockPanel>
+            <materialDesign:ColorZone Padding="16 10" materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                      Mode="PrimaryMid" DockPanel.Dock="Top">
+                <DockPanel>
+                    <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
+                                  x:Name="MenuToggleButton" />
+                    <materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges"
+                                             StaysOpen="False">
+                        <StackPanel />
+                    </materialDesign:PopupBox>
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" Text="Bestellverwaltung"></TextBlock>
+                </DockPanel>
+            </materialDesign:ColorZone>
+            <Grid>
+                <reactiveUi:RoutedViewHost
+                    Grid.Row="0"
+                    x:Name="RoutedViewHost"
+                    HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Stretch" Margin="32 16" />
+            </Grid>
+        </DockPanel>
+    </materialDesign:DrawerHost>
+</reactiveUi:ReactiveWindow>
