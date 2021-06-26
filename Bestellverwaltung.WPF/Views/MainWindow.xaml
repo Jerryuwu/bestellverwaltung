@@ -8,9 +8,11 @@
                            xmlns:viewModels="clr-namespace:Bestellverwaltung.WPF.ViewModels"
                            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                            mc:Ignorable="d"
-                           Title="MainWindow" Height="450" Width="800">
-    
-    <materialDesign:DrawerHost OpenMode="Standard" x:Name="DrawerHost" IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+                           Title="MainWindow" Height="550" Width="1000"
+                           WindowStartupLocation="CenterScreen">
+
+    <materialDesign:DrawerHost OpenMode="Standard" x:Name="DrawerHost"
+                               IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
         <materialDesign:DrawerHost.LeftDrawerContent>
             <DockPanel MinWidth="212">
                 <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}"
@@ -22,32 +24,31 @@
                     <ListViewItem x:Name="NewOrder" Height="60">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Archive" Height="25" Width="25" Margin="10" />
-                            <TextBlock Text="Bestellung anlegen" VerticalAlignment="Center" Margin="20 10" />
+                            <TextBlock Text="Orders" VerticalAlignment="Center" Margin="20 10" />
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="60" x:Name="Articles">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="FormatListCheckbox" Height="25" Width="25" Margin="10" />
+                            <TextBlock Text="Articles" VerticalAlignment="Center" Margin="20 10" />
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem x:Name="Companies" Height="60">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Domain" Height="25" Width="25" Margin="10" />
-                            <TextBlock Text="Manage companies" VerticalAlignment="Center" Margin="20 10" />
+                            <TextBlock Text="Companies" VerticalAlignment="Center" Margin="20 10" />
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem Height="60" x:Name="Fees">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Sack" Height="25" Width="25" Margin="10" />
-                            <TextBlock Text="Manage fees" VerticalAlignment="Center" Margin="20 10" />
+                            <TextBlock Text="Fees" VerticalAlignment="Center" Margin="20 10" />
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem Height="60" x:Name="DeliveryCosts">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="CurrencyEur" Height="25" Width="25" Margin="10" />
                             <TextBlock Text="Delivery costs" VerticalAlignment="Center" Margin="20 10" />
-                        </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem Height="60" x:Name="Articles">
-                    
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="FormatListCheckbox" Height="25" Width="25" Margin="10" />
-                            <TextBlock Text="Articles" VerticalAlignment="Center" Margin="20 10" />
                         </StackPanel>
                     </ListViewItem>
                 </ListView>
@@ -59,11 +60,9 @@
                 <DockPanel>
                     <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
                                   x:Name="MenuToggleButton" />
-                    <materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges"
-                                             StaysOpen="False">
-                        <StackPanel />
-                    </materialDesign:PopupBox>
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" Text="Bestellverwaltung"></TextBlock>
+                  
+                    <TextBlock x:Name="Headline" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"
+                               Text="Bestellverwaltung" />
                 </DockPanel>
             </materialDesign:ColorZone>
             <Grid>

@@ -13,7 +13,7 @@ namespace Bestellverwaltung.WPF.ViewModels {
             _ArticleRepository = Locator.Current.GetService<IArticleRepository>();
         }
         public ViewModelActivator Activator { get; }
-        public string? UrlPathSegment => "articles";
+        public string? UrlPathSegment => "Articles";
         public IScreen HostScreen { get; }
     }
 }
