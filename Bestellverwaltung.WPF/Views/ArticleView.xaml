@@ -6,14 +6,37 @@
                                 xmlns:local="clr-namespace:Bestellverwaltung.WPF.Views"
                                 xmlns:reactiveUi="http://reactiveui.net"
                                 xmlns:viewModels="clr-namespace:Bestellverwaltung.WPF.ViewModels"
+                                xmlns:entities="clr-namespace:Bestellverwaltung.WPF.Entities"
+                                xmlns:database="clr-namespace:IFAS2Personal.WPF.Database"
+                                xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 
                                 mc:Ignorable="d"
                                 d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <Border>
-            <TextBlock Text="EEE">
-                
-            </TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <DockPanel>
+            <Button x:Name="NewButton" ToolTip="Add a new article" Width="60" >
+                <materialDesign:PackIcon Kind="ViewGridPlus" Height="25" Width="25" />
+            </Button>
+            <Button x:Name="RemoveButton" ToolTip="Remove the selected entry" Width="60" Margin="10,0,0,0">
+                <materialDesign:PackIcon Kind="DeleteOutline" Height="25" Width="25" />
+            </Button>
+            <Button x:Name="SaveButton" ToolTip="Save all changes" Width="60" Margin="0,0,0,10">
+                <materialDesign:PackIcon Kind="CloudCheckOutline" Height="25" Width="25" />
+            </Button>
+        </DockPanel>
+        <Border Grid.Row="1">
+            <DataGrid x:Name="ArticleGrid" CanUserAddRows="False" AutoGenerateColumns="False" d:DataContext="{d:DesignInstance Type=entities:ArticleEntity, IsDesignTimeCreatable=True}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Id}" Header="ID" Width="75" IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="400" IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding  Price}" Header="Price" Width="200" IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding  Stock}" Header="In stock" Width="200" IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                </DataGrid>
         </Border>
     </Grid>
 </reactiveUi:ReactiveUserControl>

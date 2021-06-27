@@ -20,6 +20,7 @@ namespace IFAS2Personal.WPF.Database {
             while (await reader.ReadAsync().ConfigureAwait(false)) {
                 yield return new ArticleEntity() {
                     Id = reader.GetInt32("id"),
+                    Name = reader.GetString("name"),
                     Price = reader.GetDecimal("price"),
                     Stock = reader.GetInt32("stock")
                 };

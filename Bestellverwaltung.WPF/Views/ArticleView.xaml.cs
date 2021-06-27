@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Reactive.Disposables;
+using System.Windows.Controls;
 using ReactiveUI;
 
 namespace Bestellverwaltung.WPF.Views {
@@ -7,7 +8,10 @@ namespace Bestellverwaltung.WPF.Views {
             InitializeComponent();
             ViewModel = new();
             this.WhenActivated(disposable => {
-
+                this.OneWayBind(ViewModel,
+                        vm => vm.Articles,
+                        v => v.ArticleGrid.ItemsSource)
+                   .DisposeWith(disposable);
             });
         }
     }

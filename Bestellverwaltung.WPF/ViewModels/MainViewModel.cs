@@ -22,12 +22,14 @@ namespace Bestellverwaltung.WPF.ViewModels {
                 this.WhenAnyValue(x => x.Activator)
                     .Subscribe()
                     .DisposeWith(disposable);
+                // Set header text to current viewmodel url-path
                 Router.CurrentViewModel
                    .WhereNotNull()
                    .Select(x => x.UrlPathSegment)
                    .WhereNotNull()
-                   .ToPropertyEx(this, x => x.Headline).DisposeWith(disposable);
-                //Router.NavigateAndReset.Execute(new ArticleViewModel());
+                   .ToPropertyEx(this, x => x.Headline)
+                   .DisposeWith(disposable);
+                Router.NavigateAndReset.Execute(new ArticleViewModel());
             });
         }
         public RoutingState Router { get; }

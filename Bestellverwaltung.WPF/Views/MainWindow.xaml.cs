@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using Bestellverwaltung.WPF.ViewModels;
 using ReactiveUI;
 using Splat;
+using ListViewItem = System.Windows.Forms.ListViewItem;
 
 namespace Bestellverwaltung.WPF {
   /// <summary>
@@ -32,19 +33,45 @@ namespace Bestellverwaltung.WPF {
             vm => vm.Router,
             v => v.RoutedViewHost.Router)
          .DisposeWith(disposable);
-        this.WhenAnyValue(x => x.MenuToggleButton.IsChecked)
-         .Select(x => !x ?? false)
-         .BindTo(this, x => x.MenuToggleButton.Visibility, new BooleanToVisibilityTypeConverter())
-         .DisposeWith(disposable);
-        Articles.Events().Selected
-         .Do(_ => ViewModel.Router.Navigate.Execute(new ArticleViewModel()))
-         .Log(this)
-         .Subscribe()
-         .DisposeWith(disposable);
         this.OneWayBind(ViewModel,
             vm => vm.Headline,
             v => v.Headline.Text)
          .DisposeWith(disposable);
+        
+        this.WhenAnyValue(x => x.MenuToggleButton.IsChecked)
+         .Select(x => !x ?? false)
+         .BindTo(this, x => x.MenuToggleButton.Visibility, new BooleanToVisibilityTypeConverter())
+         .DisposeWith(disposable);
+        
+        Articles.Events().Selected
+         .Do(_ => {
+            ViewModel.Router.Navigate.Execute(new ArticleViewModel());
+            HamburgerButton.IsChecked = false;
+          })
+         .Subscribe()
+         .DisposeWith(disposable);
+        Companies.Events().Selected
+         .Do(_ => {
+            ViewModel.Router.Navigate.Execute(new CompanyViewModel());
+            HamburgerButton.IsChecked = false;
+          })
+         .Subscribe()
+         .DisposeWith(disposable);
+        DeliveryCosts.Events().Selected
+         .Do(_ => {
+            ViewModel.Router.Navigate.Execute(new DeliveryViewModel());
+            HamburgerButton.IsChecked = false;
+          })
+         .Subscribe()
+         .DisposeWith(disposable);
+        Fees.Events().Selected
+         .Do(_ => {
+            ViewModel.Router.Navigate.Execute(new FeeViewModel());
+            HamburgerButton.IsChecked = false;
+          })
+         .Subscribe()
+         .DisposeWith(disposable);
+        
       });
     }
   }

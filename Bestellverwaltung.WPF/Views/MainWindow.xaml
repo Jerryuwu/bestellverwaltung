@@ -16,6 +16,7 @@
         <materialDesign:DrawerHost.LeftDrawerContent>
             <DockPanel MinWidth="212">
                 <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}"
+                              x:Name="HamburgerButton"
                               DockPanel.Dock="Top"
                               HorizontalAlignment="Left" Margin="16"
                               IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"
@@ -61,8 +62,9 @@
                     <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
                                   x:Name="MenuToggleButton" />
                   
-                    <TextBlock x:Name="Headline" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"
-                               Text="Bestellverwaltung" />
+                    <TextBlock x:Name="Headline" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                               Text="Bestellverwaltung">
+                    </TextBlock>
                 </DockPanel>
             </materialDesign:ColorZone>
             <Grid>
