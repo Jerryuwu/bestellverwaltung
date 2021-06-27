@@ -11,32 +11,39 @@
                                 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 
                                 mc:Ignorable="d"
-                                d:DesignHeight="300" d:DesignWidth="300">
+                                d:DesignHeight="300" d:DesignWidth="1000">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="650"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="60" />
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <DockPanel>
-            <Button x:Name="NewButton" ToolTip="Add a new article" Width="60" >
-                <materialDesign:PackIcon Kind="ViewGridPlus" Height="25" Width="25" />
+        <DockPanel Grid.Row="0" Grid.Column="0">
+            <Button x:Name="NewButton" ToolTip="Add a new article" Width="60" Margin="10, 0,0,0">
+                <materialDesign:PackIcon Kind="ViewGridPlus" Height="25" Width="25"/>
             </Button>
-            <Button x:Name="RemoveButton" ToolTip="Remove the selected entry" Width="60" Margin="10,0,0,0">
+            <Button x:Name="DeleteButton" ToolTip="Remove the selected article" Width="60" Margin="-60,0,0,0">
                 <materialDesign:PackIcon Kind="DeleteOutline" Height="25" Width="25" />
             </Button>
-            <Button x:Name="SaveButton" ToolTip="Save all changes" Width="60" Margin="0,0,0,10">
-                <materialDesign:PackIcon Kind="CloudCheckOutline" Height="25" Width="25" />
+        </DockPanel>
+        <DockPanel Grid.Row="0" Grid.Column="2">
+            <Button x:Name="SaveButton" ToolTip="Save all changes" Width="60" Margin="0,0,10,0">
+                <materialDesign:PackIcon Kind="CloudCheckOutline" Height="24" Width="30" VerticalAlignment="Center" />
             </Button>
         </DockPanel>
-        <Border Grid.Row="1">
+        <Border Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="0">
             <DataGrid x:Name="ArticleGrid" CanUserAddRows="False" AutoGenerateColumns="False" d:DataContext="{d:DesignInstance Type=entities:ArticleEntity, IsDesignTimeCreatable=True}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Id}" Header="ID" Width="75" IsReadOnly="True"/>
-                        <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="400" IsReadOnly="True"/>
-                        <DataGridTextColumn Binding="{Binding  Price}" Header="Price" Width="200" IsReadOnly="True"/>
-                        <DataGridTextColumn Binding="{Binding  Stock}" Header="In stock" Width="200" IsReadOnly="True"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Id}" Header="ID" Width="75" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="400" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding  Price}" x:Name="PricePerArticle" Header="Price" Width="200" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding  Stock}" x:Name="ArticleInStock" Header="In stock" Width="200" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
         </Border>
     </Grid>
 </reactiveUi:ReactiveUserControl>

@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Reactive;
 using System.Runtime.InteropServices;
 using Bestellverwaltung.WPF.Entities;
 using DynamicData;
@@ -12,6 +13,9 @@ namespace Bestellverwaltung.WPF.ViewModels {
     public class ArticleViewModel : ReactiveObject, IActivatableViewModel, IRoutableViewModel{
 
         [Reactive] public ObservableCollection<ArticleEntity> Articles { get; set; }
+        public ReactiveCommand<Unit, Unit> NewCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> DeleteCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> SaveCommand { get; set; }
         private IArticleRepository _ArticleRepository { get; }
         public ArticleViewModel() {
             Activator = new();
@@ -21,13 +25,13 @@ namespace Bestellverwaltung.WPF.ViewModels {
             var t1 = new ArticleEntity() {
                 Id = 1,
                 Name = "Some nice stuff",
-                Price = (decimal) 3.4,
+                Price = (decimal) 13.43,
                 Stock = 4
             };
             var t2 = new ArticleEntity() {
                 Id = 2,
                 Name = "Some other nice stuff",
-                Price = (decimal) 3.4,
+                Price = (decimal) 32.62,
                 Stock = 4
             };
             Articles.Add(t1);
