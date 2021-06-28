@@ -8,6 +8,7 @@
                            xmlns:viewModels="clr-namespace:Bestellverwaltung.WPF.ViewModels"
                            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                            mc:Ignorable="d"
+                           Language="de-DE"
                            Title="MainWindow" Height="550" Width="1000"
                            WindowStartupLocation="CenterScreen">
 

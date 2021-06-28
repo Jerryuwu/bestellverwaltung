@@ -27,6 +27,7 @@ namespace Bestellverwaltung.WPF {
             Locator.CurrentMutable.RegisterViewsForViewModels(Assembly.GetCallingAssembly());
             
             Locator.CurrentMutable.Register(() => new ArticleRepository(), typeof(IArticleRepository));
+            Locator.CurrentMutable.Register(() => new CompanyRepository(), typeof(ICompanyRepository));
             
       
             Locator.CurrentMutable.RegisterConstant(new ConsoleLogger(), typeof(ILogger));

@@ -44,34 +44,26 @@ namespace Bestellverwaltung.WPF {
          .DisposeWith(disposable);
         
         Articles.Events().Selected
-         .Do(_ => {
-            ViewModel.Router.Navigate.Execute(new ArticleViewModel());
-            HamburgerButton.IsChecked = false;
-          })
+         .Do(_ => ViewModel.Router.Navigate.Execute(new ArticleViewModel()))
          .Subscribe()
          .DisposeWith(disposable);
         Companies.Events().Selected
-         .Do(_ => {
-            ViewModel.Router.Navigate.Execute(new CompanyViewModel());
-            HamburgerButton.IsChecked = false;
-          })
+         .Do(_ => ViewModel.Router.Navigate.Execute(new CompanyViewModel()))
          .Subscribe()
          .DisposeWith(disposable);
         DeliveryCosts.Events().Selected
-         .Do(_ => {
-            ViewModel.Router.Navigate.Execute(new DeliveryViewModel());
-            HamburgerButton.IsChecked = false;
-          })
+         .Do(_ => ViewModel.Router.Navigate.Execute(new DeliveryViewModel()))
          .Subscribe()
          .DisposeWith(disposable);
         Fees.Events().Selected
-         .Do(_ => {
-            ViewModel.Router.Navigate.Execute(new FeeViewModel());
-            HamburgerButton.IsChecked = false;
-          })
+         .Do(_ => ViewModel.Router.Navigate.Execute(new TaxViewModel()))
          .Subscribe()
          .DisposeWith(disposable);
         
+        ViewModel.Router.NavigationChanged
+            .Select(_ => false)
+            .BindTo(this, x => x.HamburgerButton.IsChecked)
+            .DisposeWith(disposable);
       });
     }
   }

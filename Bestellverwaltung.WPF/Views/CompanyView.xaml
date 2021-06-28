@@ -6,9 +6,47 @@
                            xmlns:local="clr-namespace:Bestellverwaltung.WPF.Views"
                            xmlns:reactiveUi="http://reactiveui.net"
                            xmlns:viewModels="clr-namespace:Bestellverwaltung.WPF.ViewModels"
+                           xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                           xmlns:entities="clr-namespace:Bestellverwaltung.WPF.Entities"
                            mc:Ignorable="d"
-                           d:DesignHeight="300" d:DesignWidth="300">
+                           d:DesignHeight="300" d:DesignWidth="1000">
     <Grid>
-        <TextBlock>EEE</TextBlock>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="650"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <DockPanel Grid.Row="0" Grid.Column="0">
+            <Button x:Name="NewButton" ToolTip="Add a new company" Width="60" Margin="10, 0,0,0">
+                <materialDesign:PackIcon Kind="ViewGridPlus" Height="25" Width="25"/>
+            </Button>
+            <Button x:Name="DeleteButton" ToolTip="Remove the selected company" Width="60" Margin="-60,0,0,0">
+                <materialDesign:PackIcon Kind="DeleteOutline" Height="25" Width="25" />
+            </Button>
+        </DockPanel>
+        <DockPanel Grid.Row="0" Grid.Column="2">
+            <Button x:Name="SaveButton" ToolTip="Save all changes" Width="60" Margin="0,0,10,0">
+                <materialDesign:PackIcon Kind="CloudCheckOutline" Height="24" Width="30" VerticalAlignment="Center" />
+            </Button>
+        </DockPanel>
+        <Border Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="0">
+            <DataGrid x:Name="CompanyGrid" CanUserAddRows="False" AutoGenerateColumns="False" d:DataContext="{d:DesignInstance Type=entities:CompanyEntity, IsDesignTimeCreatable=True}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Id}" CanUserResize="False" Header="ID" Width="75" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding Name}" CanUserResize="False" Header="Name" Width="200"/>
+                    <DataGridTextColumn Binding="{Binding Owner}" CanUserResize="False" Header="Owner" Width="100"/>
+                    <DataGridTextColumn Binding="{Binding City}" CanUserResize="False" Header="City" Width="100"/>
+                    <DataGridTextColumn Binding="{Binding Address}" CanUserResize="False"  Header="Address" Width="100"/>
+                    <DataGridTextColumn Binding="{Binding Postcode}" CanUserResize="False" Header="Postcode" Width="100"/>
+                    <DataGridTextColumn Binding="{Binding Telephone}" CanUserResize="False" Header="Telephone" Width="145"/>
+                    <DataGridTextColumn Binding="{Binding Fax}" CanUserResize="False" Header="Fax" Width="100"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
     </Grid>
 </reactiveUi:ReactiveUserControl>

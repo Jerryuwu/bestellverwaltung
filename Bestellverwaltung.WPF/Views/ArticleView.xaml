@@ -9,14 +9,13 @@
                                 xmlns:entities="clr-namespace:Bestellverwaltung.WPF.Entities"
                                 xmlns:database="clr-namespace:IFAS2Personal.WPF.Database"
                                 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-
                                 mc:Ignorable="d"
                                 d:DesignHeight="300" d:DesignWidth="1000">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="650"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="60" />
@@ -38,10 +37,10 @@
         <Border Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="0">
             <DataGrid x:Name="ArticleGrid" CanUserAddRows="False" AutoGenerateColumns="False" d:DataContext="{d:DesignInstance Type=entities:ArticleEntity, IsDesignTimeCreatable=True}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Id}" Header="ID" Width="75" IsReadOnly="True"/>
-                    <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="400" IsReadOnly="True"/>
-                    <DataGridTextColumn Binding="{Binding  Price}" x:Name="PricePerArticle" Header="Price" Width="200" IsReadOnly="True"/>
-                    <DataGridTextColumn Binding="{Binding  Stock}" x:Name="ArticleInStock" Header="In stock" Width="200" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding Id}" Header="ID" CanUserResize="False" Width="75" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Name" CanUserResize="False" Width="400"/>
+                    <DataGridTextColumn Binding="{Binding  Price, StringFormat=C}" x:Name="PricePerArticle" CanUserResize="False"  Header="Price" Width="200"/>
+                    <DataGridTextColumn Binding="{Binding  Stock, StringFormat='0 in stock'}" x:Name="ArticleInStock" CanUserResize="False" Header="In stock" Width="200"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Border>

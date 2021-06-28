@@ -1,5 +1,8 @@
-﻿using System.Reactive.Disposables;
+﻿using System;
+using System.Reactive.Disposables;
+using System.Reactive.Linq;
 using System.Windows.Controls;
+using System.Windows.Input;
 using ReactiveUI;
 
 namespace Bestellverwaltung.WPF.Views {
@@ -20,10 +23,9 @@ namespace Bestellverwaltung.WPF.Views {
                 this.BindCommand(ViewModel,
                     vm => vm.DeleteCommand,
                     v => v.DeleteButton).DisposeWith(disposable);
-
-                PricePerArticle.Binding.StringFormat = "####.## €";
-                ArticleInStock.Binding.StringFormat = "######## in stock";
-                
+                this.WhenAnyValue(x => x.ArticleGrid.SelectedItem)
+                    .BindTo(this, x => x.ViewModel.SelectedArticle)
+                    .DisposeWith(disposable);
             });
         }
     }

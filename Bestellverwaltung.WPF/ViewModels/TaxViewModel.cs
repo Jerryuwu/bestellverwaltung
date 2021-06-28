@@ -2,9 +2,9 @@
 using Splat;
 
 namespace Bestellverwaltung.WPF.ViewModels {
-  public class FeeViewModel : ReactiveObject, IRoutableViewModel, IActivatableViewModel {
+  public class TaxViewModel : ReactiveObject, IRoutableViewModel, IActivatableViewModel {
 
-    public FeeViewModel() {
+    public TaxViewModel() {
       Activator = new();
       HostScreen = Locator.Current.GetService<IScreen>();
     }
