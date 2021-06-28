@@ -28,6 +28,7 @@ namespace Bestellverwaltung.WPF {
             
             Locator.CurrentMutable.Register(() => new ArticleRepository(), typeof(IArticleRepository));
             Locator.CurrentMutable.Register(() => new CompanyRepository(), typeof(ICompanyRepository));
+            Locator.CurrentMutable.Register(() => new TaxRepository(), typeof(ITaxRepository));
             
       
             Locator.CurrentMutable.RegisterConstant(new ConsoleLogger(), typeof(ILogger));

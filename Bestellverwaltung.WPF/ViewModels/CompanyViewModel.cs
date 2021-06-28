@@ -44,7 +44,6 @@ namespace Bestellverwaltung.WPF.ViewModels {
     }
 
     private async Task SaveCompany() {
-      Console.WriteLine("eee");
       foreach (var article in Companies) {
         _ = _CompanyRepository.SaveOrUpdateCompany(article);
       }

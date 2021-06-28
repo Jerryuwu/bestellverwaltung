@@ -55,7 +55,7 @@ namespace Bestellverwaltung.WPF {
          .Do(_ => ViewModel.Router.Navigate.Execute(new DeliveryViewModel()))
          .Subscribe()
          .DisposeWith(disposable);
-        Fees.Events().Selected
+        Taxes.Events().Selected
          .Do(_ => ViewModel.Router.Navigate.Execute(new TaxViewModel()))
          .Subscribe()
          .DisposeWith(disposable);

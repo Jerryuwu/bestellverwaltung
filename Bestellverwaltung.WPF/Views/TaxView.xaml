@@ -20,7 +20,7 @@
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
-        <DataGrid Grid.Column="0" x:Name="FeeGrid" CanUserAddRows="False" AutoGenerateColumns="False" d:DataContext="{d:DesignInstance Type=entities:FeeEntity, IsDesignTimeCreatable=True}" Grid.RowSpan="2">
+        <DataGrid Grid.Column="0" x:Name="TaxGrid" CanUserAddRows="False" AutoGenerateColumns="False" d:DataContext="{d:DesignInstance Type=entities:TaxEntity, IsDesignTimeCreatable=True}" Grid.RowSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}" Header="ID" IsReadOnly="True" Width="150"/>
                 <DataGridTextColumn Binding="{Binding Percentage}" Header="Percentage" IsReadOnly="True" Width="350"/>
