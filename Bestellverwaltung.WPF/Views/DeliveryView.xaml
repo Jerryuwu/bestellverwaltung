@@ -6,9 +6,58 @@
                                 xmlns:local="clr-namespace:Bestellverwaltung.WPF.Views"
                                 xmlns:reactiveUi="http://reactiveui.net"
                                 xmlns:viewModels="clr-namespace:Bestellverwaltung.WPF.ViewModels"
+                                xmlns:entities="clr-namespace:Bestellverwaltung.WPF.Entities"
+                                xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                                 mc:Ignorable="d"
                                 d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <TextBlock>EEE2</TextBlock>
-    </Grid>
+<Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="120"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid Grid.Column="0" x:Name="DeliveryGrid" CanUserAddRows="False" AutoGenerateColumns="False" d:DataContext="{d:DesignInstance Type=entities:DeliveryCostEntity, IsDesignTimeCreatable=True}" Grid.RowSpan="4">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Amount, StringFormat=C}" Header="Amount" IsReadOnly="True" Width="150"/>
+                <DataGridTextColumn Binding="{Binding Bonus, StringFormat=C}" Header="Extra Cost" IsReadOnly="True" Width="350"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBox Grid.Column="1"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+            VerticalAlignment="Center"
+            x:Name="NewAmount"
+            Height="50"
+            AcceptsReturn="True"
+            TextWrapping="Wrap"
+            VerticalScrollBarVisibility="Auto"
+            materialDesign:HintAssist.Hint="Amount"
+            Margin="25,0,25,0"/>
+        <TextBox Grid.Column="2"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+            VerticalAlignment="Center"
+            x:Name="NewBonus"
+            Height="50"
+            AcceptsReturn="True"
+            TextWrapping="Wrap"
+            VerticalScrollBarVisibility="Auto"
+            materialDesign:HintAssist.Hint="Extra costs" Margin="25,0,25,0"/>
+        <Button Grid.Row="1" Grid.Column="1" x:Name="SaveButton" ToolTip="Save delivery cost" Width="120">
+            <materialDesign:PackIcon Kind="CloudCheckOutline" Height="24" Width="30" VerticalAlignment="Center" />
+        </Button>
+        <Button Grid.Row="2" Grid.Column="1" x:Name="DeleteButton" ToolTip="Delete selected cost" Width="120">
+            <materialDesign:PackIcon Kind="DeleteOutline" Height="24" Width="30" VerticalAlignment="Center" />
+        </Button>
+        <GroupBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
+                  Header="Usage"
+                  Margin="6,6,6,6">
+            <TextBlock
+                TextWrapping="Wrap"
+                Text="Delivery costs created in here will be automatically added onto the orders. Enter the the minimum amount into the 'Amount' box and the corresponding extra costs in the 'Extra costs' box" />
+        </GroupBox>    </Grid>
 </reactiveUi:ReactiveUserControl>

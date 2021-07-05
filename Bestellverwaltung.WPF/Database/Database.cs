@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Threading.Tasks;
 using MySqlConnector;
 
@@ -26,6 +27,17 @@ namespace IFAS2Personal.WPF.Database {
                     Password = PASSWORD,
                     Database = DATABASE
                 }.ConnectionString;
+        }
+        public async Task<int> GetNextId(string table) {
+            if (Connection.State != ConnectionState.Open) return -2;
+            await using var cmd =
+                new MySqlCommand(
+                    "select AUTO_INCREMENT from information_schema.TABLES where TABLE_SCHEMA = ? and TABLE_NAME = ?", Connection);
+            cmd.Parameters.Add(new MySqlParameter("schema", Settings.DATABASE));
+            cmd.Parameters.Add(new MySqlParameter("table", table));
+            var id = await cmd.ExecuteScalarAsync();
+            if (!int.TryParse(id?.ToString(), out var idConverted)) return -1;
+            return idConverted;
         }
     }
 }

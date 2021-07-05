@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Threading.Tasks;
 using Bestellverwaltung.WPF.Entities;
 using MySqlConnector;
@@ -8,7 +10,7 @@ namespace IFAS2Personal.WPF.Database {
         public IAsyncEnumerable<TaxEntity> GetAllTaxes();
         public Task<TaxEntity> GetTaxById(int id);
         public Task<TaxEntity> SaveOrUpdateTax(TaxEntity entity);
-
+        
         public Task DeleteTax(TaxEntity entity);
     }
     public class TaxRepository : ITaxRepository{
@@ -21,7 +23,7 @@ namespace IFAS2Personal.WPF.Database {
             while (await reader.ReadAsync().ConfigureAwait(false)) {
                 yield return new TaxEntity() {
                     Id = reader.GetInt32("id"),
-                    Percentage = reader.GetInt32("percentage")
+                    Percentage = reader.GetDecimal("percentage")
                 };
             }
         }
@@ -30,12 +32,27 @@ namespace IFAS2Personal.WPF.Database {
             throw new System.NotImplementedException();
         }
 
-        public Task<TaxEntity> SaveOrUpdateTax(TaxEntity entity) {
-            throw new System.NotImplementedException();
+        public async Task<TaxEntity> SaveOrUpdateTax(TaxEntity entity) {
+            await using var db = new Database();
+            await db.Connection.OpenAsync();
+            await using var cmd = new MySqlCommand("insert into taxes (id, percentage) values (@id, @percentage) on duplicate key update id = @id, percentage = @percentage",
+                db.Connection);
+            cmd.Parameters.AddRange(new MySqlParameter[] {
+                new("id", entity.Id),
+                new("percentage", entity.Percentage)
+            });
+            await cmd.ExecuteNonQueryAsync().ConfigureAwait(false);
+            entity.Id ??= Convert.ToInt32(cmd.LastInsertedId);
+            return entity;
         }
 
-        public Task DeleteTax(TaxEntity entity) {
-            throw new System.NotImplementedException();
+        public async Task DeleteTax(TaxEntity entity) {
+            await using var db = new Database();
+            await db.Connection.OpenAsync();
+            await using var cmd = new MySqlCommand("delete from taxes where id = @id", db.Connection);
+
+            cmd.Parameters.AddWithValue("id", entity.Id);
+            await cmd.ExecuteNonQueryAsync();
         }
     }
 }

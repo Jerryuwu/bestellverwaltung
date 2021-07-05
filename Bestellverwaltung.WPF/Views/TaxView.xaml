@@ -12,25 +12,27 @@
                                 d:DesignHeight="300" d:DesignWidth="2000">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="25*"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="120"/>
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="500"/>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
-        <DataGrid Grid.Column="0" x:Name="TaxGrid" CanUserAddRows="False" AutoGenerateColumns="False" d:DataContext="{d:DesignInstance Type=entities:TaxEntity, IsDesignTimeCreatable=True}" Grid.RowSpan="2">
+        <DataGrid Grid.Column="0" x:Name="TaxGrid" CanUserAddRows="False" AutoGenerateColumns="False" d:DataContext="{d:DesignInstance Type=entities:TaxEntity, IsDesignTimeCreatable=True}" Grid.RowSpan="4">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}" Header="ID" IsReadOnly="True" Width="150"/>
-                <DataGridTextColumn Binding="{Binding Percentage}" Header="Percentage" IsReadOnly="True" Width="350"/>
+                <DataGridTextColumn Binding="{Binding Percentage, StringFormat={}{0}%}" Header="Percentage" IsReadOnly="True" Width="350"/>
             </DataGrid.Columns>
         </DataGrid>
         <TextBox Grid.Column="1"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
-            VerticalAlignment="Top"
+            VerticalAlignment="Center"
+            x:Name="NextIdText"
             Height="50"
-            Width="150"
             Text="New ID"
             IsReadOnly="True"
             AcceptsReturn="True"
@@ -39,16 +41,22 @@
             materialDesign:HintAssist.Hint="ID of new fee" Margin="25,0,25,0"/>
         <TextBox Grid.Column="2"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
-            VerticalAlignment="Top"
+            VerticalAlignment="Center"
+            x:Name="PercentageText"
             Height="50"
-            Width="150"
             AcceptsReturn="True"
             TextWrapping="Wrap"
             VerticalScrollBarVisibility="Auto"
-            materialDesign:HintAssist.Hint="Percentage of fee"/>
-        <GroupBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
-            Header="Usage"
-            Margin="6">
+            materialDesign:HintAssist.Hint="Percentage of fee" Margin="25,0,25,0"/>
+        <Button Grid.Row="1" Grid.Column="1" x:Name="SaveButton" ToolTip="Save new tax" Width="120">
+            <materialDesign:PackIcon Kind="CloudCheckOutline" Height="24" Width="30" VerticalAlignment="Center" />
+        </Button>
+        <Button Grid.Row="2" Grid.Column="1" x:Name="DeleteButton" ToolTip="Delete selected tax" Width="120">
+            <materialDesign:PackIcon Kind="DeleteOutline" Height="24" Width="30" VerticalAlignment="Center" />
+        </Button>
+        <GroupBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
+                  Header="Usage"
+                  Margin="6,6,6,6">
             <TextBlock
                 TextWrapping="Wrap"
                 Text="Fees are used to tax the orders. There can only be a single fee for each order. When creating a new fee, the ID will automatically be loaded. After typing in the fee, press the save button to save the fee." />
